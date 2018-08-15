@@ -69,6 +69,13 @@ var (
 		},
 	}
 
+	licenseStatus = map[string]string{
+		"id":                "myLicID",
+		"start_timestamp":   "2018-06-01T00:00:00Z",
+		"end_timestamp":     "2018-09-01T00:00:00Z",
+		"current_timestamp": "2018-08-15T21:13:55.808324164Z",
+	}
+
 	mesosMetricsSnapshot = map[string]int{
 		"master/cpus_total":        10,
 		"master/cpus_used":         2,
@@ -96,6 +103,10 @@ func mockHealthReportHandler(w http.ResponseWriter, r *http.Request) {
 
 func mockFrameworksHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(mesosFrameworks)
+}
+
+func mockLicenseHandler(w http.ResponseWriter, r *http.Request) {
+	json.NewEncoder(w).Encode(licenseStatus)
 }
 
 func mockMesosStatsHandler(w http.ResponseWriter, r *http.Request) {
@@ -129,10 +140,12 @@ func mockRouter() *mux.Router {
 		frameworks = "/frameworks"
 		mesosStats = "/metrics/snapshot"
 		tester     = "/tester"
+		license    = "/licensing/v1/status"
 	)
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc(health, mockHealthReportHandler).Methods("GET")
 	router.HandleFunc(frameworks, mockFrameworksHandler).Methods("GET")
+	router.HandleFunc(license, mockLicenseHandler).Methods("GET")
 	router.HandleFunc(mesosStats, mockMesosStatsHandler).Methods("GET")
 	router.HandleFunc(cosmos, mockCosmosReportHandler).Methods("POST")
 	router.HandleFunc(fmt.Sprintf("%s/badjson", health), mockBadJson).Methods("GET")

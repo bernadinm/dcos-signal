@@ -16,7 +16,7 @@ func TestMakeReporters(t *testing.T) {
 		t.Error("Expected nil errors getting reporters, got", rErr)
 	}
 
-	if len(r) != 3 {
-		t.Error("Expected 3 reporters, got", len(r))
+	if len(r) != 4 {
+		t.Error("Expected 4 reporters, got", len(r))
 	}
 }

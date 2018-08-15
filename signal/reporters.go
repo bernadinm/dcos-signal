@@ -32,6 +32,14 @@ func makeReporters(c config.Config) (chan Reporter, error) {
 				"content-type": "application/json",
 			},
 		},
+		&License{
+			Name:      "license",
+			Endpoints: c.LicenseURLs,
+			Method:    "GET",
+			Headers: map[string]string{
+				"content-type": "application/json",
+			},
+		},
 	}
 
 	reportChan := make(chan Reporter, len(reporters))

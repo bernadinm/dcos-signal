@@ -18,6 +18,7 @@ type Config struct {
 	DiagnosticsURLs []string `json:"diagnostics_urls"`
 	CosmosURLs      []string `json:"cosmos_urls"`
 	MesosURLs       []string `json:"mesos_urls"`
+	LicenseURLs     []string `json:"license_urls"`
 
 	// CA Configuration for TLS requests
 	CACertPath string `json:"ca_cert_path"`
